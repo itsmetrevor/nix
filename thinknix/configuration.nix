@@ -52,10 +52,6 @@
     EDITOR = "hx";
   };
 
-  services.getty.autologinUser = "trevor";
-
-  services.openssh.enable = true;
-
   networking.networkmanager.enable = true;
   networking.hostName = "thinknix";
   networking.firewall = {
