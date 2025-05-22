@@ -13,6 +13,7 @@
     bat
     ripgrep
     lazygit
+    gh # Github CLI
     docker-compose
 
     btop

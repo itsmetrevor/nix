@@ -74,6 +74,7 @@
     ripgrep
     btop
     lazygit
+    gh # Github CLI
     ranger
     rmtrash
     pandoc
