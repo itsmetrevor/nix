@@ -41,7 +41,11 @@
 
   users.users.trevor.openssh.authorizedKeys.keys = [
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDE4ieX+67TgNa5uf3eKxhDfBNKysUAszNh32UUvFzyO2zZ0e2voxL42KzgFJLU3FKRxBMdPmiescdfE/VVR2WzJkNs9k97x72GtH+aFFfU3El3DO5A0HowyE/bIXLeJQpQ0kFYV/djibd6UbkXOuQ2l/6XIdH9l1fEWOoltnpYgSh0pYT+sQQjtD8trmzY3iN/YSRiGlxUBdeC8CmYcFPiLQdU9oNsFTMMQ5N0ZANqU8lCqt8nrvqq5sBkXmMIxtLAxK5qVwp+DwmZiVxnOOFuOYs6HG1zDbuhug9tT1+2WercRxFdeJEnM/CH/BJ4/ek9raC+6EpfP+lwC9Nf+nRiNgJwag0RWNe8By0JpanDh2hMdegqZQjO0sG8Ulx96nCB27UZrWJLg7KYObXGM66kULoYEKJu0qL5rgaExVqIag7so/nxJL+LqGVyLMIybshLRZkH+06AQGloWRhO+gJ8TKyX/Au5dG0Eihi32wHHWkDtqT35LgQTtq+QT5LOcHk="
-  ]
+  ];
+
+  services.fail2ban.enable = true;
+  services.openssh.enable = true;
+  services.openssh.settings.PasswordAuthentication = false;
 
   environment.variables = {
     EDITOR = "hx";
@@ -54,7 +58,7 @@
   networking.networkmanager.enable = true;
   networking.hostName = "thinknix";
   networking.firewall = {
-    allowedTCPPorts = [ ];
+    allowedTCPPorts = [ 22 ];
     allowedUDPPorts = [ ];
   };
 
