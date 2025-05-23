@@ -53,7 +53,7 @@
 
   programs.xonsh = {
     enable = true;
-    config = builtins.readFile ../dotfiles/.xonshrc;
+    config = builtins.readFile ../dotfiles/xonshrc;
   };
 
 
