@@ -67,7 +67,10 @@
 
   system.autoUpgrade = {
     enable = true;
+    flake = "github:itsmetrevor/nixconfig/#thinknix";
+    flags = [ "--update-input" "nixpkgs" "-L" ];
     dates = "07:00";
+    allowReboot = true;
   };
 
   nix.gc = {
