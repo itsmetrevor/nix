@@ -64,7 +64,7 @@
   environment.systemPackages = with pkgs; [
     nushell
     
-    helix
+    evil-helix
     zellij
     kakoune
     neovim
