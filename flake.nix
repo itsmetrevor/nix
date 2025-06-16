@@ -5,9 +5,17 @@
 
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
+    # nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
+
+    #  Pass two extra flags when you run nixos-rebuild for the initial configuration switchover:
+    #    sudo nixos-rebuild \
+    #    --option extra-substituters https://install.determinate.systems \
+    #    --option extra-trusted-public-keys cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM= \
+    #    --flake . \
+    #    switch
+    
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 

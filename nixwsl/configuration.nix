@@ -62,19 +62,19 @@
   };
 
   environment.systemPackages = with pkgs; [
-    nushell
     
-    evil-helix
-    zellij
-    kakoune
+    opencode           # https://github.com/opencode-ai/opencode
+    evil-helix         # https://github.com/usagi-flow/evil-helix
     neovim
+    zellij
+
     bat
     eza
     lsd
     ripgrep
     btop
     lazygit
-    gh # Github CLI
+    gh                 # Github CLI
     ranger
     rmtrash
     pandoc
