@@ -68,6 +68,14 @@
     neovim
     zellij
 
+    nerd-fonts.fira-code
+
+    gcc
+    gnumake
+
+    unzip
+    fd
+    fzf
     bat
     eza
     lsd
