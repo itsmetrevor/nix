@@ -63,8 +63,9 @@
 
   environment.systemPackages = with pkgs; [
     
-    opencode           # https://github.com/opencode-ai/opencode
+    # opencode           # https://github.com/opencode-ai/opencode
     evil-helix         # https://github.com/usagi-flow/evil-helix
+    kakoune
     neovim
     zellij
 
