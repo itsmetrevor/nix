@@ -7,7 +7,7 @@
 # https://nix-community.github.io/NixOS-WSL/
 # https://nixos.wiki/wiki/WSL
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-unstable, ... }:
 
 {
   imports = [
@@ -63,7 +63,7 @@
 
   environment.systemPackages = with pkgs; [
     
-    # opencode           # https://github.com/opencode-ai/opencode
+    gemini-cli
     evil-helix         # https://github.com/usagi-flow/evil-helix
     kakoune
     neovim
@@ -89,6 +89,9 @@
     pandoc
  
     packwiz
+
+    nushell
+    fish
   ];
 
   users.users.trevor = {
