@@ -1,9 +1,9 @@
 # XONSH WEBCONFIG START
 
 # My Default Prompt
-$PROMPT = '\n{INTENSE_RED}{user}{RESET} at {INTENSE_PURPLE}{hostname}{RESET} in {BOLD_GREEN}{cwd}{RESET}\n🐚 '
+# $PROMPT = '\n{INTENSE_RED}{user}{RESET} at {INTENSE_PURPLE}{hostname}{RESET} in {BOLD_GREEN}{cwd}{RESET}\n🐚 '
 
 # Zellij Prompt
-# $PROMPT = '\n🐚 '
+$PROMPT = '\n🐚 '
 
 # XONSH WEBCONFIG END

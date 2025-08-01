@@ -10,13 +10,8 @@
 { config, lib, pkgs, pkgs-unstable, ... }:
 
 {
-  imports = [
-
-  ];
-
-
-  # https://nix-community.github.io/NixOS-WSL/options.html
   wsl = {
+  # https://nix-community.github.io/NixOS-WSL/options.html
     enable = true;
     defaultUser = "trevor";
     interop.includePath = false;
@@ -45,6 +40,8 @@
     fixedRandomDelay = true;
   };
 
+  virtualisation.podman.enable = true;
+
   programs.git = {
     enable = true;
     config.user.email = "huffsmith07@gmail.com";
@@ -56,20 +53,21 @@
     config = builtins.readFile ../dotfiles/xonshrc;
   };
 
+  programs.zoxide.enable = true;
 
   environment.variables = {
     EDITOR = "hx";
+    _ZO_DOCTOR = 0; # Remove zoxide error check (false positive)
   };
 
   environment.systemPackages = with pkgs; [
-    
+
     gemini-cli
     evil-helix         # https://github.com/usagi-flow/evil-helix
-    kakoune
     neovim
     zellij
 
-    nerd-fonts.fira-code
+    podman-compose
 
     gcc
     gnumake
@@ -89,9 +87,6 @@
     pandoc
  
     packwiz
-
-    nushell
-    fish
   ];
 
   users.users.trevor = {
