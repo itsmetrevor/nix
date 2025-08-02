@@ -1,7 +1,3 @@
-#########################
-# XONSH WEBCONFIG START #
-#########################
-
 
 $VI_MODE = True
 
@@ -19,8 +15,3 @@ if not 'ZELLIJ' in ${...}:
 		zellij
 	if 'ZELLIJ_AUTO_EXIT' in ${...} and $ZELLIJ_AUTO_EXIT == True:
 		exit
-
-	
-#######################
-# XONSH WEBCONFIG END #
-#######################
