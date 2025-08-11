@@ -69,6 +69,7 @@
 
     podman-compose
 
+    gdb
     gcc
     gnumake
 
