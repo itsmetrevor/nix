@@ -1,46 +1,67 @@
 {
 
 
-  # TODO: Add nixbook configuration.
-  #   - Include lanzeboote for secureboot
-  #   - https://github.com/nix-community/lanzaboote
-
-
   description = "This flake really ties my systems together";
 
 
   inputs = {
-    pkgs.url            = "github:nixos/nixpkgs?ref=nixos-unstable";
     pkgs-stable.url     = "github:nixos/nixpkgs?ref=nixos-25.05";
+    pkgs-unstable.url   = "github:nixos/nixpkgs?ref=nixos-unstable";
+    
+    # Chaotic-Nix: https://www.nyx.chaotic.cx/
+    pkgs-chaotic.url    = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    # NixOS-WSL Docs: https://nix-community.github.io/NixOS-WSL/index.html
+    # NixOS-Hardware: https://github.com/NixOS/nixos-hardware
+    nixos-hardware.url  = "github:nixos/nixos-hardware/master";
+
+    # NixOS-WSL: https://nix-community.github.io/NixOS-WSL/index.html
     nixos-wsl.url       = "github:nix-community/NixOS-WSL/main";
   };
 
 
-  outputs = { self, pkgs, pkgs-stable, nixos-wsl, ... }: {
+  outputs = { self, ...} @inputs : {
 
-    nixosConfigurations.nixbook = pkgs.lib.nixosSystem {
+    nixosConfigurations.nixace = inputs.pkgs-stable.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = {};
+      specialArgs = { inherit inputs; };
       modules = [
-        ./nixbook/configuration.nix
+        inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
+        ./hardware/nixace.nix
+        ./systems/shared/common.nix
+        ./systems/shared/audio.nix
+        ./systems/nixace.nix
       ];
     };
 
-    nixosConfigurations.nixwsl = pkgs.lib.nixosSystem {
+    nixosConfigurations.nixbox = inputs.pkgs-unstable.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit pkgs-stable; };
+      specialArgs = { inherit inputs; };
       modules = [
-        ./nixwsl/configuration.nix
-        nixos-wsl.nixosModules.default 
+        inputs.pkgs-chaotic.nixosModules.default
+        ./hardware/nixbox.nix
+        ./systems/shared/common.nix
+        ./systems/shared/audio.nix
+        ./systems/nixbox.nix
       ];
     };
 
-    nixosConfigurations.thinknix = pkgs.lib.nixosSystem {
+    nixosConfigurations.nixwsl = inputs.pkgs-stable.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
       modules = [
-        ./thinknix/configuration.nix
+        inputs.nixos-wsl.nixosModules.default 
+        ./systems/shared/common.nix
+        ./systems/nixwsl.nix
+      ];
+    };
+
+    nixosConfigurations.nixserv = inputs.pkgs-stable.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./hardware/nixserv.nix
+        ./systems/shared/common.nix
+        ./systems/nixserv.nix
       ];
     };
 
