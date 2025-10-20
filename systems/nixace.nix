@@ -36,8 +36,15 @@
   };
 
   programs.firefox.enable = true;
+
   programs.zoxide.enable = true;
   programs.fish.enable = true;
+  programs.starship = {
+    enable = true;
+    # transientPrompt.enable = true;
+    # transientPrompt.right = "starship module time";
+    # transientPrompt.left = "starship module character";
+  };
   users.users.trevor.shell = "${pkgs.fish}/bin/fish";
 
   environment.systemPackages = with pkgs; [
