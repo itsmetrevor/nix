@@ -1,12 +1,16 @@
-{ config, pkgs, pkgs-unstable, ... }: {
+{ config, pkgs, pkgs-stable, ... }: {
 
 
   networking.hostName = "nixace";
-  hardware.microsoft-surface.kernelVersion = "stable";
+
+  # boot.kernelPackages = pkgs-stable.linuxPackages;
+  # hardware.microsoft-surface.kernelVersion = "stable";
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  services.scx.enable = true;
 
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   services.printing.enable = true;
   services.printing.cups-pdf.enable = true;
@@ -23,8 +27,6 @@
   environment.variables = {
     EDITOR = "hx";
     VISUAL = "hx";
-
-    WARP_ENABLE_WAYLAND = 1;
   };
 
   programs.git = {
@@ -35,8 +37,8 @@
 
   programs.firefox.enable = true;
   programs.zoxide.enable = true;
-  programs.xonsh.enable = true;
-  users.users.trevor.shell = "${pkgs.xonsh}/bin/xonsh";
+  programs.fish.enable = true;
+  users.users.trevor.shell = "${pkgs.fish}/bin/fish";
 
   environment.systemPackages = with pkgs; [
 
@@ -55,7 +57,6 @@
     gemini-cli
     gh # Github CLI
     lazygit
-    age
 
     leetcode-cli
 
@@ -65,11 +66,11 @@
     obsidian
     vesktop
     vscode
+    warp-terminal
 
     nerd-fonts.jetbrains-mono
     gnomeExtensions.paperwm
-
-    (warp-terminal.override { waylandSupport = true; })
+    gnomeExtensions.blur-my-shell
   ];
 
   networking.firewall.allowedTCPPorts = [ ];

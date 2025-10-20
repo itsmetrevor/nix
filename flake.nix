@@ -5,27 +5,36 @@
 
 
   inputs = {
-    pkgs-stable.url     = "github:nixos/nixpkgs?ref=nixos-25.05";
-    pkgs-unstable.url   = "github:nixos/nixpkgs?ref=nixos-unstable";
+    pkgs-stable.url       = "https://flakehub.com/f/NixOS/nixpkgs/0.*.tar.gz";
+    pkgs-unstable.url     = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
     
     # Chaotic-Nix: https://www.nyx.chaotic.cx/
-    pkgs-chaotic.url    = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    pkgs-chaotic.url      = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
 
     # NixOS-Hardware: https://github.com/NixOS/nixos-hardware
-    nixos-hardware.url  = "github:nixos/nixos-hardware/master";
+    nixos-hardware.url    = "github:nixos/nixos-hardware/master";
 
     # NixOS-WSL: https://nix-community.github.io/NixOS-WSL/index.html
-    nixos-wsl.url       = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.url         = "github:nix-community/NixOS-WSL/main";
   };
 
 
-  outputs = { self, ...} @inputs : {
+  outputs = { self, ...} @inputs : let
 
-    nixosConfigurations.nixace = inputs.pkgs-stable.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
+    linux = "x86_64-linux";
+    in {
+
+
+    nixosConfigurations.nixace = inputs.pkgs-unstable.lib.nixosSystem {
+      system = linux;
+      specialArgs = {
+        pkgs-stable = import inputs.pkgs-stable {
+          system = linux;
+          config.allowUnfree = true;
+        };
+      };
       modules = [
-        inputs.nixos-hardware.nixosModules.microsoft-surface-pro-intel
+        inputs.pkgs-chaotic.nixosModules.default
         ./hardware/nixace.nix
         ./systems/shared/common.nix
         ./systems/shared/audio.nix
@@ -33,8 +42,9 @@
       ];
     };
 
+
     nixosConfigurations.nixbox = inputs.pkgs-unstable.lib.nixosSystem {
-      system = "x86_64-linux";
+      system = linux;
       specialArgs = { inherit inputs; };
       modules = [
         inputs.pkgs-chaotic.nixosModules.default
@@ -45,8 +55,9 @@
       ];
     };
 
+
     nixosConfigurations.nixwsl = inputs.pkgs-stable.lib.nixosSystem {
-      system = "x86_64-linux";
+      system = linux;
       specialArgs = { inherit inputs; };
       modules = [
         inputs.nixos-wsl.nixosModules.default 
@@ -55,8 +66,9 @@
       ];
     };
 
+
     nixosConfigurations.nixserv = inputs.pkgs-stable.lib.nixosSystem {
-      system = "x86_64-linux";
+      system = linux;
       specialArgs = { inherit inputs; };
       modules = [
         ./hardware/nixserv.nix
@@ -64,6 +76,7 @@
         ./systems/nixserv.nix
       ];
     };
+
 
   };
 
