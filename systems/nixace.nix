@@ -17,6 +17,7 @@
 
   services.onedrive.enable = true;
 
+  nix.settings.trusted-users = [ "root" "trevor" ];
   users.users.trevor = {
     isNormalUser = true;
     description = "trevor";
@@ -50,6 +51,7 @@
   environment.systemPackages = with pkgs; [
 
     nix-search-cli
+    cachix
     
     bat
     btop
