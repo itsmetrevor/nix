@@ -37,45 +37,51 @@
   };
 
   programs.firefox.enable = true;
+  programs.chromium.enable = true;
 
   programs.zoxide.enable = true;
   programs.fish.enable = true;
-  programs.starship = {
-    enable = true;
-    # transientPrompt.enable = true;
-    # transientPrompt.right = "starship module time";
-    # transientPrompt.left = "starship module character";
-  };
+  programs.starship.enable = true;
   users.users.trevor.shell = "${pkgs.fish}/bin/fish";
 
   environment.systemPackages = with pkgs; [
 
+    ghostty
+
     nix-search-cli
     cachix
-    
+
     bat
     btop
     lsd
 
     fd
     fzf
-    ranger
+    yazi
     ripgrep
-    
+
     evil-helix
+    zed-editor
+    vscode
+    vscodium
+    code-cursor
+
+    cursor-cli
     gemini-cli
+    opencode
+    aider-chat-full
+
     gh # Github CLI
     lazygit
 
     leetcode-cli
 
+    brave
     google-chrome
     bitwarden
     libreoffice
     obsidian
     vesktop
-    vscode
-    warp-terminal
 
     nerd-fonts.jetbrains-mono
     gnomeExtensions.paperwm
