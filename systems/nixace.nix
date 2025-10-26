@@ -59,22 +59,12 @@
     # n8n
 
     evil-helix
-    # Cline, Roo, Kilo --> vscode / vscodium
-    # vscode
-    vscodium
+    vscodium # cline, roo, kilo
     code-cursor
     windsurf
     zed-editor
 
-    cursor-cli
-    claude-code
-    claude-code-router
-    # cline-cli
-    gemini-cli
-    qwen-code
     opencode # integrates mcp, integrates nvim
-    # plandex
-    # Openhands via uv? docker?
 
     leetcode-cli
 

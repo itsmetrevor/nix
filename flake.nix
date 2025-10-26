@@ -8,6 +8,7 @@
     pkgs-stable.url       = "https://flakehub.com/f/NixOS/nixpkgs/0.*.tar.gz";
     pkgs-unstable.url     = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
 
+    # Home-Manager: https://home-manager-options.extranix.com/
     home-manager.url      = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "pkgs-unstable";
     
@@ -23,16 +24,17 @@
 
 
   outputs = { self, ...} @inputs : let
-    linux = "x86_64-linux";
+    linux64 = "x86_64-linux";
+    chaotic-nyx = inputs.pkgs-chaotic.nixosModules.default;
     in {
 
 
     nixosConfigurations.nixace = inputs.pkgs-unstable.lib.nixosSystem {
-      system = linux;
+      system = linux64;
 
       specialArgs = {
         pkgs-stable = import inputs.pkgs-stable {
-          system = linux;
+          system = linux64;
           config.allowUnfree = true;
         };
       };
@@ -42,7 +44,7 @@
         ./systems/shared/common.nix
         ./systems/shared/audio.nix
         ./systems/nixace.nix
-        inputs.pkgs-chaotic.nixosModules.default
+        chaotic-nyx
         inputs.home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -54,10 +56,10 @@
 
 
     nixosConfigurations.nixbox = inputs.pkgs-unstable.lib.nixosSystem {
-      system = linux;
+      system = linux64;
       specialArgs = { inherit inputs; };
       modules = [
-        inputs.pkgs-chaotic.nixosModules.default
+        chaotic-nyx
         ./hardware/nixbox.nix
         ./systems/shared/common.nix
         ./systems/shared/audio.nix
@@ -67,7 +69,7 @@
 
 
     nixosConfigurations.nixwsl = inputs.pkgs-stable.lib.nixosSystem {
-      system = linux;
+      system = linux64;
       specialArgs = { inherit inputs; };
       modules = [
         inputs.nixos-wsl.nixosModules.default 
@@ -78,7 +80,7 @@
 
 
     nixosConfigurations.nixserv = inputs.pkgs-stable.lib.nixosSystem {
-      system = linux;
+      system = linux64;
       specialArgs = { inherit inputs; };
       modules = [
         ./hardware/nixserv.nix
