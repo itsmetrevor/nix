@@ -3,8 +3,6 @@
 
   networking.hostName = "nixace";
 
-  # boot.kernelPackages = pkgs-stable.linuxPackages;
-  # hardware.microsoft-surface.kernelVersion = "stable";
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
   services.scx.enable = true;
 
@@ -22,7 +20,7 @@
     isNormalUser = true;
     description = "trevor";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
+    shell = pkgs.nushell;
   };
 
   environment.variables = {
@@ -39,48 +37,51 @@
   programs.firefox.enable = true;
   programs.chromium.enable = true;
 
-  programs.zoxide.enable = true;
-  programs.fish.enable = true;
-  programs.starship.enable = true;
-  users.users.trevor.shell = "${pkgs.fish}/bin/fish";
-
   environment.systemPackages = with pkgs; [
 
-    ghostty
-
+    fastfetch
     nix-search-cli
     cachix
 
     bat
     btop
-    lsd
-
     fd
     fzf
-    yazi
+    grex
     ripgrep
-
-    evil-helix
-    zed-editor
-    vscode
-    vscodium
-    code-cursor
-
-    cursor-cli
-    gemini-cli
-    opencode
-    aider-chat-full
-
+    rmtrash
+    ttyd
+    
     gh # Github CLI
     lazygit
+    uv
+    # devpod
+    # n8n
+
+    evil-helix
+    # Cline, Roo, Kilo --> vscode / vscodium
+    # vscode
+    vscodium
+    code-cursor
+    windsurf
+    zed-editor
+
+    cursor-cli
+    claude-code
+    claude-code-router
+    # cline-cli
+    gemini-cli
+    qwen-code
+    opencode # integrates mcp, integrates nvim
+    # plandex
+    # Openhands via uv? docker?
 
     leetcode-cli
 
     brave
-    google-chrome
     bitwarden
     libreoffice
-    obsidian
+    obsidian # can connect with mcp servers!
     vesktop
 
     nerd-fonts.jetbrains-mono

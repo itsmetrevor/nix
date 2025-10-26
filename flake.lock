@@ -33,6 +33,27 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
+          "pkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1761446278,
+        "narHash": "sha256-RHABglEx32ruvQ+4OqPibeZC/reBfDEBaqKJF0pe4YE=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "64020f453bdf3634bf88a6bbce7f3e56183c8b2b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
           "pkgs-chaotic",
           "nixpkgs"
         ]
@@ -167,7 +188,7 @@
     "pkgs-chaotic": {
       "inputs": {
         "flake-schemas": "flake-schemas",
-        "home-manager": "home-manager",
+        "home-manager": "home-manager_2",
         "jovian": "jovian",
         "nixpkgs": "nixpkgs_2",
         "rust-overlay": "rust-overlay"
@@ -215,6 +236,7 @@
     },
     "root": {
       "inputs": {
+        "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "pkgs-chaotic": "pkgs-chaotic",

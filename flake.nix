@@ -7,6 +7,9 @@
   inputs = {
     pkgs-stable.url       = "https://flakehub.com/f/NixOS/nixpkgs/0.*.tar.gz";
     pkgs-unstable.url     = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+
+    home-manager.url      = "github:nix-community/home-manager/master";
+    home-manager.inputs.nixpkgs.follows = "pkgs-unstable";
     
     # Chaotic-Nix: https://www.nyx.chaotic.cx/
     pkgs-chaotic.url      = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
@@ -20,25 +23,32 @@
 
 
   outputs = { self, ...} @inputs : let
-
     linux = "x86_64-linux";
     in {
 
 
     nixosConfigurations.nixace = inputs.pkgs-unstable.lib.nixosSystem {
       system = linux;
+
       specialArgs = {
         pkgs-stable = import inputs.pkgs-stable {
           system = linux;
           config.allowUnfree = true;
         };
       };
+
       modules = [
-        inputs.pkgs-chaotic.nixosModules.default
         ./hardware/nixace.nix
         ./systems/shared/common.nix
         ./systems/shared/audio.nix
         ./systems/nixace.nix
+        inputs.pkgs-chaotic.nixosModules.default
+        inputs.home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "BACKUP";
+          home-manager.users.trevor = import ./home/trevor.nix;
+        }
       ];
     };
 
@@ -79,6 +89,4 @@
 
 
   };
-
-
 }
