@@ -67,8 +67,6 @@
     opencode # integrates mcp, integrates nvim
     gemini-cli
     qwen-code
-    claude-code
-    claude-code-router
 
     leetcode-cli
 
