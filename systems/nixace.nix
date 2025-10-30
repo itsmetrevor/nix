@@ -37,49 +37,18 @@
   programs.firefox.enable = true;
   programs.chromium.enable = true;
 
-  environment.systemPackages = with pkgs; [
+  virtualisation.docker = {
+    enable = true;
+    rootless.enable = true;
+    rootless.setSocketVariable = true;
+  };
 
-    fastfetch
-    nix-search-cli
-    cachix
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [ ];
+  };
 
-    bat
-    btop
-    fd
-    fzf
-    grex
-    ripgrep
-    rmtrash
-    ttyd
-    
-    gh # Github CLI
-    lazygit
-    uv
-    # devpod
-    # n8n
-
-    evil-helix
-    vscodium # cline, roo, kilo
-    code-cursor
-    windsurf
-    zed-editor
-
-    opencode # integrates mcp, integrates nvim
-    gemini-cli
-    qwen-code
-
-    leetcode-cli
-
-    brave
-    bitwarden
-    libreoffice
-    obsidian # can connect with mcp servers!
-    vesktop
-
-    nerd-fonts.jetbrains-mono
-    gnomeExtensions.paperwm
-    gnomeExtensions.blur-my-shell
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
