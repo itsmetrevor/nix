@@ -6,31 +6,26 @@
   home.homeDirectory = "/home/trevor";
 
   programs.ghostty.enable = true;
-  programs.nushell.enable = true;
+  programs.fish.enable = true;
 
 	programs.zoxide = {
 	  enable = true;
-	  enableNushellIntegration = true;
+	  enableFishIntegration = true;
 	};
 
 	programs.atuin = {
 	  enable = true;
-	  enableNushellIntegration = true;
-	};
-
-	programs.carapace = {
-	  enable = true;
-	  enableNushellIntegration = true;
+	  enableFishIntegration = true;
 	};
 
 	programs.starship = {
 	  enable = true;
-	  enableNushellIntegration = true;
+	  enableFishIntegration = true;
 	};
 
 	programs.yazi = {
 	  enable = true;
-	  enableNushellIntegration = true;
+	  enableFishIntegration = true;
 	};
 
 	home.packages = with pkgs; [
@@ -44,11 +39,13 @@
 		fd
 		fzf
 		grex
+		lsd
 		ripgrep
 		rmtrash
 		ttyd
 
 		uv
+		direnv
 		docker
 		docker-compose
 		lazydocker

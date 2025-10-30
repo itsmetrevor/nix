@@ -16,11 +16,14 @@
   services.onedrive.enable = true;
 
   nix.settings.trusted-users = [ "root" "trevor" ];
+
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
+
   users.users.trevor = {
     isNormalUser = true;
     description = "trevor";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.nushell;
   };
 
   environment.variables = {
