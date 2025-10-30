@@ -7,6 +7,7 @@
 
   programs.ghostty.enable = true;
   programs.nushell.enable = true;
+  programs.git.enable = true;
 
 	programs.zoxide = {
 	  enable = true;
