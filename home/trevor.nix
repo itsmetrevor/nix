@@ -7,7 +7,6 @@
 
   programs.ghostty.enable = true;
   programs.nushell.enable = true;
-  programs.git.enable = true;
 
 	programs.zoxide = {
 	  enable = true;
@@ -49,12 +48,11 @@
 		rmtrash
 		ttyd
 
-		gh
-		lazygit
 		uv
 		docker
 		docker-compose
 		lazydocker
+		lazygit
 		devpod
 		n8n
 

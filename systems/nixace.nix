@@ -48,7 +48,9 @@
     libraries = with pkgs; [ ];
   };
 
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [
+    gh # github-cli
+  ];
 
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
