@@ -1,6 +1,4 @@
-{ config, pkgs, ...}:
-
-{
+{ config, pkgs, ...}: {
 
   home.username = "trevor";
   home.homeDirectory = "/home/trevor";
@@ -65,7 +63,6 @@
 
 		leetcode-cli
 
-		brave
 		bitwarden
 		libreoffice
 		obsidian
